@@ -2,11 +2,10 @@ FROM openjdk:8u131-jdk-alpine
 
 RUN apk --update add curl wget
 
-#RUN curl --retry 1000 https://netix.dl.sourceforge.net/project/pentaho/Data%20Integration/7.1/pdi-ce-7.1.0.0-12.zip -o /home/pdi.zip
-RUN wget --tries=1000 https://netix.dl.sourceforge.net/project/pentaho/Data%20Integration/7.1/pdi-ce-7.1.0.0-12.zip -O /home/pdi.zip
-#COPY pdi-ce-7.1.0.0-12.zip /home/pdi.zip
-RUN unzip /home/pdi.zip -d /home
-RUN rm /home/pdi.zip
+RUN wget --tries=1000 https://netix.dl.sourceforge.net/project/pentaho/Data%20Integration/7.1/pdi-ce-7.1.0.0-12.zip -O /home/pdi.zip; \
+	unzip /home/pdi.zip -d /home; \
+	rm /home/pdi.zip;
+
 RUN mkdir /root/.kettle
 COPY kettle.properties /root/.kettle
 COPY shared.xml /root/.kettle
