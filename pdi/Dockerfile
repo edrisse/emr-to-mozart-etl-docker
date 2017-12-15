@@ -1,3 +1,5 @@
+#docker build . -t edrisse/mozart-etl-pdi
+
 FROM openjdk:8u131-jdk-alpine
 
 RUN apk --update add curl wget
@@ -25,5 +27,5 @@ RUN curl -L https://github.com/esaude/emr-to-mozart-etl/archive/master.zip -o /h
 RUN unzip /home/master.zip -d /home
 RUN rm /home/master.zip
 
-CMD dockerize -wait tcp://emr-to-mozart-etl-mysql:3306 -timeout 600s /home/data-integration/kitchen.sh -file /home/emr-to-mozart-etl-master/migrate-data.kjb run
+CMD dockerize -wait tcp://emr-to-mozart-etl-mysql:3306 -timeout 3600s /home/data-integration/kitchen.sh -file /home/emr-to-mozart-etl-master/migrate-data.kjb run
 
